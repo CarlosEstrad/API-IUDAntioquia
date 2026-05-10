@@ -1,0 +1,215 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>MusicPlaylist.Api</name>
+    </assembly>
+    <members>
+        <member name="M:MusicPlaylist.Api.Controllers.Playlist.PlaylistController.GetPlaylist">
+            GET: api/Playlist/GetUserPlaylists
+            <summary>
+            Obtiene todas las playlists del usuario autenticado.
+            </summary>
+            <remarks>
+            Método que obtiene todas las playlists del usuario autenticado.
+            </remarks>
+            <returns>Respuesta estandarizada con el resultado.</returns>
+            <response code="401">Unauthorized. No se ha indicado o es incorrecto el token JWT de acceso</response>
+            <response code="400">Bad Request. Url no encontrada o formato de parametro incorrecto</response>
+            <response code="200">OK. lista retornada con éxito</response>
+        </member>
+        <member name="M:MusicPlaylist.Api.Controllers.Playlist.PlaylistController.GetAllUserPlaylists">
+            GET: api/Playlist/GetAllUserPlaylists
+            <summary>
+            Obtiene todas las playlists del usuario autenticado.
+            </summary>
+            <remarks>
+            Método que obtiene todas las playlists del usuario autenticado.
+            </remarks>
+            <returns>Respuesta estandarizada con el resultado.</returns>
+            <response code="401">Unauthorized. No se ha indicado o es incorrecto el token JWT de acceso</response>
+            <response code="400">Bad Request. Url no encontrada o formato de parametro incorrecto</response>
+            <response code="200">OK. lista retornada con éxito</response>
+        </member>
+        <member name="M:MusicPlaylist.Api.Controllers.Playlist.PlaylistController.CreatePlaylist(MusicPlaylist.Api.DTOs.PlayList.PlaylistRegistre)">
+            POST: api/Playlist/CreatePlaylist
+            <summary>
+            Crea una nueva playlist para el usuario logueado.
+            </summary>
+            <remarks>
+            Método que crea una nueva playlist para el usuario logueado.
+            </remarks>
+            <param name="dto">Datos de la playlist.</param>
+            <returns>Respuesta estandarizada con el resultado.</returns>
+            <response code="401">Unauthorized. No se ha indicado o es incorrecto el token JWT de acceso</response>
+            <response code="400">Bad Request. Url no encontrada o formato de parametro incorrecto</response>
+            <response code="200">OK. lista retornada con éxito</response>
+        </member>
+        <member name="M:MusicPlaylist.Api.Controllers.Playlist.PlaylistController.UpdatePlaylist(MusicPlaylist.Api.DTOs.PlayList.PlaylistDto)">
+            PUT: api/Playlist/UpdatePlaylist
+            <summary>
+            Actualiza una playlist existente.
+            </summary>
+            <remarks>
+            Método que actualiza una playlist existente.
+            </remarks>
+            <param name="dto">Datos de la playlist.</param>
+            <returns>Respuesta estandarizada con el resultado.</returns>
+            <response code="401">Unauthorized. No se ha indicado o es incorrecto el token JWT de acceso</response>
+            <response code="400">Bad Request. Url no encontrada o formato de parametro incorrecto</response>
+            <response code="200">OK. lista retornada con éxito</response>
+        </member>
+        <member name="M:MusicPlaylist.Api.Controllers.Playlist.PlaylistController.DeletePlaylist(System.Int32)">
+            DELETE: api/Playlist/DeletePlaylist
+            <summary>
+            Elimina una playlist.
+            </summary>
+            <remarks>
+            Método que elimina una playlist..
+            </remarks>
+            <param name="id">identificador de la playlist.</param>
+            <returns>Respuesta estandarizada con el resultado.</returns>
+            <response code="401">Unauthorized. No se ha indicado o es incorrecto el token JWT de acceso</response>
+            <response code="400">Bad Request. Url no encontrada o formato de parametro incorrecto</response>
+            <response code="200">OK. lista retornada con éxito</response>
+        </member>
+        <member name="M:MusicPlaylist.Api.Controllers.Playlist.PlaylistController.AddSongToPlaylist(MusicPlaylist.Api.DTOs.Song.AddSongDto)">
+            POST: api/Playlist/AddSongToPlaylist
+            <summary>
+            Asocia una canción a una playlist específica.
+            </summary>
+            <remarks>
+            Método que asocia una canción a una playlist específica.
+            </remarks>
+            <param name="dto">data de la canción para asociarla a la playlist.</param>
+            <returns>Respuesta estandarizada con el resultado.</returns>
+            <response code="401">Unauthorized. No se ha indicado o es incorrecto el token JWT de acceso</response>
+            <response code="400">Bad Request. Url no encontrada o formato de parametro incorrecto</response>
+            <response code="200">OK. lista retornada con éxito</response>
+        </member>
+        <member name="M:MusicPlaylist.Api.Controllers.Playlist.PlaylistController.RemoveSongFromPlaylist(System.Int32,System.Int32)">
+            DELETE: api/Playlist/RemoveSongFromPlaylist/{playlistId}/{songId}
+            <summary>
+            Remueve una canción de una playlist.
+            </summary>
+            <remarks>
+            Método que remueve una canción de una playlist.
+            </remarks>
+            <param name="playlistId">Identificador de la playlist la playlist.</param>
+            <param name="songId">Identificador de la canción.</param>
+            <returns>Respuesta estandarizada con el resultado.</returns>
+            <response code="401">Unauthorized. No se ha indicado o es incorrecto el token JWT de acceso</response>
+            <response code="400">Bad Request. Url no encontrada o formato de parametro incorrecto</response>
+            <response code="200">OK. lista retornada con éxito</response>
+        </member>
+        <member name="M:MusicPlaylist.Api.Controllers.Security.AuthController.Login(MusicPlaylist.Api.DTOs.Login.LoginDto)">
+            GET: api/ListarUsuarios
+            <summary>
+            Realiza la autenticación de un usuario para obtener un token de acceso.
+            </summary>
+            <remarks>
+            Método que realiza la autenticación de un usuario para obtener un token de acceso.
+            </remarks>
+            <param name="loginDto">Objeto que contiene las credenciales del usuario (Email y Password).</param>
+            <returns>
+            Una estructura <see cref="T:MusicPlaylist.Api.DTOs.Helpers.Reply"/> que contiene el token JWT y la información básica del usuario 
+            si la autenticación es exitosa.
+            </returns>
+            <response code="200">Retorna el token y los datos del usuario.</response>
+            <response code="401">Si las credenciales son inválidas o el usuario no existe.</response>
+            <response code="400">Si hay un error en el formato de los datos enviados.</response>
+        </member>
+        <member name="M:MusicPlaylist.Api.Controllers.Security.AuthController.Register(MusicPlaylist.Api.DTOs.Login.RegisterDto)">
+            POST: api/Auth/register
+            <summary>
+            Registra un nuevo usuario en el sistema.
+            </summary>
+            <remarks>
+            Método que registra un nuevo usuario en el sistema.
+            </remarks>
+            <param name="registerDto">Datos del nuevo usuario.</param>
+            <returns>Respuesta estandarizada con el resultado de la creación.</returns>
+            <response code="401">Unauthorized. No se ha indicado o es incorrecto el token JWT de acceso</response>
+            <response code="400">Bad Request. Url no encontrada o formato de parametro incorrecto</response>
+            <response code="200">OK. lista retornada con éxito</response>
+        </member>
+        <member name="M:MusicPlaylist.Api.Controllers.Security.AuthController.UpdateProfile(MusicPlaylist.Api.DTOs.Login.UserUpdateDto)">
+            POST: api/Auth/register
+            <summary>
+            Actualiza la información del usuario autenticado.
+            </summary>
+            <remarks>
+            Método que actualiza la información del usuario autenticado.
+            </remarks>
+            <param name="updateDto">Datos para actualizar un usuario.</param>
+            <returns>Respuesta estandarizada con el resultado de la creación.</returns>
+            <response code="401">Unauthorized. No se ha indicado o es incorrecto el token JWT de acceso</response>
+            <response code="400">Bad Request. Url no encontrada o formato de parametro incorrecto</response>
+            <response code="200">OK. lista retornada con éxito</response>
+        </member>
+        <member name="M:MusicPlaylist.Api.Controllers.Song.SongController.GetAllSongs">
+            GET: api/Song/GetAllSongs
+            <summary>
+            Obtiene el catálogo completo de canciones disponibles.
+            </summary>
+            <remarks>
+            Método que obtiene el catálogo completo de canciones disponibles.
+            </remarks>
+            <returns>Respuesta estandarizada con la lista de canciones.</returns>
+            <response code="401">Unauthorized. No se ha indicado o es incorrecto el token JWT de acceso</response>
+            <response code="400">Bad Request. Url no encontrada o formato de parametro incorrecto</response>
+            <response code="200">OK. lista retornada con éxito</response>
+        </member>
+        <member name="M:MusicPlaylist.Api.Controllers.Song.SongController.CreateSong(MusicPlaylist.Api.DTOs.Song.SongDto)">
+            POST: api/Song/CreateSong
+            <summary>
+            Registra una nueva canción en la base de datos.
+            </summary>
+            <param name="dto">Datos de la canción (Title, Artist, Album, Duration).</param>
+            <remarks>
+            Método que registra una nueva canción en la base de datos.
+            </remarks>
+            <returns>Respuesta estandarizada con los datos creados para la canción.</returns>
+            <response code="401">Unauthorized. No se ha indicado o es incorrecto el token JWT de acceso</response>
+            <response code="400">Bad Request. Url no encontrada o formato de parametro incorrecto</response>
+            <response code="200">OK. lista retornada con éxito</response>
+        </member>
+        <member name="M:MusicPlaylist.Api.Controllers.Song.SongController.UpdateSong(MusicPlaylist.Api.DTOs.Song.SongDto)">
+            PUT: api/Song/UpdateSong
+            <summary>
+            Actualiza la información de una canción mediante su ID.
+            </summary>
+            <param name="dto">Datos de la canción (Title, Artist, Album, Duration).</param>
+            <remarks>
+            Método que actualiza la información de una canción mediante su ID.
+            </remarks>
+            <returns>Respuesta estandarizada con los datos actualizados de una canción.</returns>
+            <response code="401">Unauthorized. No se ha indicado o es incorrecto el token JWT de acceso</response>
+            <response code="400">Bad Request. Url no encontrada o formato de parametro incorrecto</response>
+            <response code="200">OK. lista retornada con éxito</response>
+        </member>
+        <member name="M:MusicPlaylist.Api.Controllers.Song.SongController.DeleteSong(System.Int32)">
+            PUT: api/Song/UpdateSong
+            <summary>
+            Elimina una canción del sistema y sus asociaciones en playlists.
+            </summary>
+            <param name="id">Identificador de la canción.</param>
+            <remarks>
+            Método que elimina una canción del sistema y sus asociaciones en playlists.
+            </remarks>
+            <returns>Respuesta estandarizada con sastifactoria.</returns>
+            <response code="401">Unauthorized. No se ha indicado o es incorrecto el token JWT de acceso</response>
+            <response code="400">Bad Request. Url no encontrada o formato de parametro incorrecto</response>
+            <response code="200">OK. lista retornada con éxito</response>
+        </member>
+        <member name="T:MusicPlaylist.Api.DTOs.Helpers.Reply">
+            <summary>
+            Estructura para las respuestas en los controladores
+            </summary>
+        </member>
+        <member name="T:MusicPlaylist.Api.DTOs.Helpers.LoginReplyModel">
+            <summary>
+            Estructura para las respuestas en los servicios
+            </summary>
+        </member>
+    </members>
+</doc>

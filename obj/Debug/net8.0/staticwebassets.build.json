@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "vXa7EvbMiQm7jbc6U0V3BC4z9frnZN1Pa0mKg+x7kmE=",
+  "Source": "MusicPlaylist.Api",
+  "BasePath": "_content/MusicPlaylist.Api",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}
