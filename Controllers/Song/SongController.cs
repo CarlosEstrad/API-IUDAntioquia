@@ -88,7 +88,7 @@ namespace MusicPlaylist.Api.Controllers.Song
         #endregion
 
         #region Elimina una canción del sistema y sus asociaciones en playlists.
-        /// PUT: api/Song/UpdateSong
+        /// PUT: api/Song/DeleteSong/{id}
         /// <summary>
         /// Elimina una canción del sistema y sus asociaciones en playlists.
         /// </summary>

@@ -6,7 +6,7 @@
         public string Title { get; set; }
         public string Artist { get; set; }
         public string Album { get; set; }
-        public int Duration { get; set; } // En segundos, como en tus INSERT
+        public string Duration { get; set; } // En segundos
     }
 
     public class AddSongDto

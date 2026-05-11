@@ -70,7 +70,7 @@ namespace MusicPlaylist.Api.Services.Playlist
         #endregion
 
         #region Actualiza una playlist existente.
-        public async Task<LoginReplyModel> UpdatePlaylist(PlaylistDto playlistDto)
+        public async Task<LoginReplyModel> UpdatePlaylist(PlaylistUpdate playlistDto)
         {
             var result = await _context.Database.ExecuteSqlRawAsync(
                 "EXEC sp_UpdatePlaylist @Id = {0}, @Name = {1}, @Description = {2}",
@@ -96,7 +96,7 @@ namespace MusicPlaylist.Api.Services.Playlist
             {
                 Status = 200,
                 Flag = true,
-                Message = result != null ? "Playlist eliminada" : "No se pudo eliminar",
+                Message = result != 0 ? "Playlist eliminada" : "No existe Playlist para ser eliminada",
                 Data = result
             };
         }
@@ -113,7 +113,7 @@ namespace MusicPlaylist.Api.Services.Playlist
             {
                 Status = 200,
                 Flag = true,
-                Message = result != null ? "Canción añadida a la playlist" : "No se pudo añadir la canción",
+                Message = result > 0 ? "Canción añadida a la playlist" : "Está canción ya se encuentra asociada para esta PlayList, Intenta asociar otra canción.",
                 Data = result
             };
 
@@ -131,7 +131,7 @@ namespace MusicPlaylist.Api.Services.Playlist
             {
                 Status = 200,
                 Flag = true,
-                Message = result != null ? "Canción removida de la playlist" : "La canción no estaba en la lista",
+                Message = result != 0 ? "Canción removida de la playlist" : "No existe relación para ser eliminada de la PlayList",
                 Data = result
             };
         }

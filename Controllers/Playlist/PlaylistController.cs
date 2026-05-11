@@ -138,7 +138,7 @@ namespace MusicPlaylist.Api.Controllers.Playlist
         [HttpPut("UpdatePlaylist")]
         [ProducesResponseType(typeof(Reply), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(Reply), StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> UpdatePlaylist([FromBody] PlaylistDto dto)
+        public async Task<IActionResult> UpdatePlaylist([FromBody] PlaylistUpdate dto)
         {
             var result = await _playlistService.UpdatePlaylist(dto);
 
@@ -169,11 +169,11 @@ namespace MusicPlaylist.Api.Controllers.Playlist
         /// <response code="401">Unauthorized. No se ha indicado o es incorrecto el token JWT de acceso</response>
         /// <response code="400">Bad Request. Url no encontrada o formato de parametro incorrecto</response>
         /// <response code="200">OK. lista retornada con éxito</response>
-        [HttpDelete("DeletePlaylist")]
+        [HttpDelete("DeletePlaylist/{id}")]
         [ProducesResponseType(typeof(Reply), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(Reply), StatusCodes.Status400BadRequest)]
 
-        public async Task<IActionResult> DeletePlaylist(int id)
+        public async Task<IActionResult> DeletePlaylist([FromRoute] int id)
         {
             var result = await _playlistService.DeletePlaylist(id);
 

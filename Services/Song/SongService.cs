@@ -21,8 +21,8 @@ namespace MusicPlaylist.Api.Services.Song
             try
             {
                 // Consultamos la vista definida en SQL
-                var songs = await _context.Songs
-                    .FromSqlRaw("SELECT * FROM vw_GetAllSongs")
+                var songs = await _context.Database
+                    .SqlQuery<SongDto>($"SELECT * FROM vw_GetAllSongs")
                     .ToListAsync();
 
                 if (songs == null || !songs.Any())
@@ -32,7 +32,7 @@ namespace MusicPlaylist.Api.Services.Song
                         Status = 200,
                         Flag = true,
                         Message = "No se encontraron canciones en el catálogo.",
-                        Data = new List<SongDto>()
+                        Data = null
                     };
                 }
 
@@ -61,16 +61,32 @@ namespace MusicPlaylist.Api.Services.Song
         public async Task<LoginReplyModel> CreateSong(SongDto songDto)
         {
             // Usamos los parámetros en el orden del SP
+            var songs = new LoginReplyModel();
             var result = await _context.Database.ExecuteSqlRawAsync(
                 "EXEC sp_CreateSong @Title={0}, @Artist={1}, @Album={2}, @Duration={3}",
                 songDto.Title, songDto.Artist, songDto.Album, songDto.Duration);
+
+            if (result == 1)
+            {
+                songs = await GetAllSongs();
+            }
+            else
+            {
+                return new LoginReplyModel
+                {
+                    Status = 404,
+                    Flag = true,
+                    Message = "No se puedo registrar la canción intentalo de nuevo.",
+                    Data = songs.Data
+                };
+            }
 
             return new LoginReplyModel
             {
                 Status = 200,
                 Flag = true,
                 Message = "Canción registrada exitosamente",
-                Data = result
+                Data = songs.Data
             };
         }
         #endregion
@@ -78,16 +94,32 @@ namespace MusicPlaylist.Api.Services.Song
         #region Actualiza la información de una canción mediante su ID.
         public async Task<LoginReplyModel> UpdateSong(SongDto songDto)
         {
+            var songs = new LoginReplyModel();
             var result = await _context.Database.ExecuteSqlRawAsync(
                 "EXEC sp_UpdateSong @Id={0}, @Title={1}, @Artist={2}, @Album={3}, @Duration={4}",
                 songDto.Id, songDto.Title, songDto.Artist, songDto.Album, songDto.Duration);
+
+            if (result == 1)
+            {
+                songs = await GetAllSongs();
+            }
+            else
+            {
+                return new LoginReplyModel
+                {
+                    Status = 404,
+                    Flag = true,
+                    Message = "No se puedo actualizar la canción intentalo de nuevo.",
+                    Data = songs.Data
+                };
+            }
 
             return new LoginReplyModel
             {
                 Status = 200,
                 Flag = true,
                 Message = "Datos de la canción actualizados",
-                Data = result
+                Data = songs.Data
             };
         }
         #endregion
@@ -95,19 +127,34 @@ namespace MusicPlaylist.Api.Services.Song
         #region Elimina una canción del sistema y sus asociaciones en playlists.
         public async Task<LoginReplyModel> DeleteSong(int id)
         {
+            var songs = new LoginReplyModel();
             // IMPORTANTE: Primero limpiamos la relación en la tabla intermedia 
             // para evitar errores de llave foránea.
             await _context.Database.ExecuteSqlRawAsync("DELETE FROM PlaylistSongs WHERE SongId = {0}", id);
 
-            // Ahora sí eliminamos la canción
             var result = await _context.Database.ExecuteSqlRawAsync("DELETE FROM Songs WHERE Id = {0}", id);
+
+            if (result == 1)
+            {
+                songs = await GetAllSongs();
+            }
+            else
+            {
+                return new LoginReplyModel
+                {
+                    Status = 404,
+                    Flag = true,
+                    Message = "No se puedo Eliminar la canción intentalo de nuevo.",
+                    Data = songs.Data
+                };
+            }
 
             return new LoginReplyModel
             {
                 Status = 200,
                 Flag = true,
                 Message = "Canción eliminada del sistema",
-                Data = result
+                Data = songs.Data
             };
         }
         #endregion
