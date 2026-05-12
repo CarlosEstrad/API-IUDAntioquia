@@ -35,22 +35,13 @@ namespace MusicPlaylist.Api.Controllers.Security
         /// <response code="200">Retorna el token y los datos del usuario.</response>
         /// <response code="401">Si las credenciales son inválidas o el usuario no existe.</response>
         /// <response code="400">Si hay un error en el formato de los datos enviados.</response>
+        [AllowAnonymous]
         [HttpPost("login")]
         [ProducesResponseType(typeof(Reply), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(Reply), StatusCodes.Status401Unauthorized)]
         public async Task<IActionResult> Login([FromBody] LoginDto loginDto)
         {
             var result = await _authService.Authenticate(loginDto.Email, loginDto.Password);
-
-            if (result == null || !result.Flag)
-            {
-                return Unauthorized(new Reply
-                {
-                    Ok = false,
-                    Message = result?.Message ?? "Credenciales incorrectas o servicio no disponible",
-                    Data = null
-                });
-            }
 
             var token = result.Data != null ? _authService.GenerateToken((UserModels)result.Data) : null;
 
@@ -85,6 +76,7 @@ namespace MusicPlaylist.Api.Controllers.Security
         /// <response code="401">Unauthorized. No se ha indicado o es incorrecto el token JWT de acceso</response>
         /// <response code="400">Bad Request. Url no encontrada o formato de parametro incorrecto</response>
         /// <response code="200">OK. lista retornada con éxito</response>
+        [AllowAnonymous]
         [HttpPost("register")]
         [ProducesResponseType(typeof(Reply), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(Reply), StatusCodes.Status400BadRequest)]

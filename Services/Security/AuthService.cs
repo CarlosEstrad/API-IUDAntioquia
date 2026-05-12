@@ -38,7 +38,7 @@ namespace MusicPlaylist.Api.Services.Security
 
             reply.Data = user;
             reply.Message = user == null ? "El usuario no existe" : isValid ? "Usuario Correcto" : "Contraseña incorrecta";
-            reply.Flag = true;
+            reply.Flag = user == null ? false : true;
             reply.Status = 200;
             return reply;
 

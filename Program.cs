@@ -81,7 +81,10 @@ builder.Services.AddAuthentication(options => {
 // 5. CORS
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy("Open", b => b.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
+    options.AddPolicy("AllowAngular",
+        policy => policy.WithOrigins("http://localhost:4200")
+                        .AllowAnyMethod()
+                        .AllowAnyHeader());
 });
 
 var app = builder.Build();
@@ -96,11 +99,12 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-app.UseCors("Open");
+//app.UseCors("Open");
+app.UseCors("AllowAngular");
 
-// ¡EL ORDEN AQUÍ ES LO QUE EVITA EL 401!
-app.UseAuthentication(); // Primero: ¿Quién eres?
-app.UseAuthorization();  // Segundo: ¿Qué permiso tienes?
+
+app.UseAuthentication();
+app.UseAuthorization(); 
 
 app.MapControllers();
 
