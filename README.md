@@ -76,8 +76,8 @@ Base de Datos: Ejecutar los scripts de la carpeta /database en su instancia de S
 
 Configurar Variables: Editar appsettings.json con sus credenciales.
 
-Restaurar y Ejecutar:
-
+Restaurar y **Ejecutar**:
+```bash
 dotnet restore
 dotnet run
 
@@ -101,7 +101,7 @@ Jwt:Issuer / Jwt:Audience: Identificadores para la validación de tokens.
 # 🧪 Instrucciones para Pruebas
 
 La API incluye pruebas unitarias y de integración:
-
+```bash
 dotnet test
 
 
@@ -143,7 +143,7 @@ Creación de esqueletos para pruebas unitarias en el Frontend.
 
 Redacción de documentación técnica y READMEs.
 
-Nota: Todo el código generado por IA fue revisado, refactorizado y validado manualmente para asegurar que cumple con los requerimientos específicos de la prueba.
+**Nota:** Todo el código generado por IA fue revisado, refactorizado y validado manualmente para asegurar que cumple con los requerimientos específicos de la prueba.
 
 ---
 
