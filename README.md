@@ -80,6 +80,7 @@ Restaurar y **Ejecutar**:
 ```bash
 dotnet restore
 dotnet run
+```
 
 
 Swagger: Disponible en https://localhost:[PORT]/swagger.
@@ -103,7 +104,7 @@ Jwt:Issuer / Jwt:Audience: Identificadores para la validación de tokens.
 La API incluye pruebas unitarias y de integración:
 ```bash
 dotnet test
-
+```
 
 Las pruebas cubren la lógica de los servicios y la correcta generación de respuestas del objeto Reply<T>.
 
@@ -147,4 +148,4 @@ Redacción de documentación técnica y READMEs.
 
 ---
 
-Autor: Carlos Estrada | Año: 2026
+**Autor:** Carlos Estrada | Año: 2026
